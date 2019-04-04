@@ -37,7 +37,7 @@ export default class FriendsList extends Component {
 
     editFriendHandler = friend => {
         axios
-            .put(`http://localhost:5000//friends/${friend.id}`, friend)
+            .put(`http://localhost:5000/friends/${friend.id}`, friend)
             .then(response => {
                 this.setState({friends: response.data});
             })
@@ -55,6 +55,9 @@ export default class FriendsList extends Component {
             }
             friend = {
                 friend
+            }
+            editFriendHandler = {
+                this.editFriendHandler
             } />)
         return (
             <div>

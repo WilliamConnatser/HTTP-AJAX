@@ -16,6 +16,12 @@ export default class extends Component {
         });
     }
 
+    deleteFriendHandler = _ => {
+        this
+            .props
+            .deleteFriendHandler(this.props.friend.id);
+    }
+
     render() {
         const {id, age, name, email} = this.props.friend;
 
@@ -25,6 +31,7 @@ export default class extends Component {
                 <div>{age}</div>
                 <div>{email}</div>
                 <button onClick={this.showEditForm}>Edit</button>
+                <button onClick={this.deleteFriendHandler}>Delete</button>
                 {this.state.editFriend
                     ? <FriendForm
                             friend={this.props.friend}

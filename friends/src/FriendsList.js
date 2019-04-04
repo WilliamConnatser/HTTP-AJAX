@@ -46,6 +46,17 @@ export default class FriendsList extends Component {
             });
     }
 
+    deleteFriendHandler = friendId => {
+        axios
+            .delete(`http://localhost:5000/friends/${friendId}`)
+            .then(response => {
+                this.setState({friends: response.data});
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
+
     render() {
         const friendsList = this
             .state
@@ -58,6 +69,9 @@ export default class FriendsList extends Component {
             }
             editFriendHandler = {
                 this.editFriendHandler
+            }
+            deleteFriendHandler = {
+                this.deleteFriendHandler
             } />)
         return (
             <div>

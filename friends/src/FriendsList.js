@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Friend from './Friend';
-import AddFriend from './AddFriend';
+import FriendForm from './FriendForm';
 
 export default class FriendsList extends Component {
     constructor(props) {
@@ -24,24 +24,41 @@ export default class FriendsList extends Component {
             });
     }
 
-    addFriendHandler = e => {
-        e.preventDefault();
-        console.log(e.target.name.value)
-        console.log(e.target.age.value)
-        console.log(e.target.email.value)
-    } 
+    addFriendHandler = newFriend => {
+        axios
+            .post(`http://localhost:5000/friends`, newFriend)
+            .then(response => {
+                this.setState({friends: response.data});
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
+
+    editFriendHandler = friend => {
+        axios
+            .put(`http://localhost:5000//friends/${friend.id}`, friend)
+            .then(response => {
+                this.setState({friends: response.data});
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
 
     render() {
         const friendsList = this
             .state
             .friends
-            .map(friend =>< Friend key = {friend.id} friend = {
+            .map(friend =>< Friend key = {
+                friend.id
+            }
+            friend = {
                 friend
             } />)
         return (
             <div>
-                <AddFriend addFriendHandler={this.addFriendHandler} />
-                {friendsList}
+                <FriendForm addFriendHandler={this.addFriendHandler}/> {friendsList}
             </div>
         )
     }

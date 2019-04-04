@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "client": "cd friends && npm start",
     "dev": "concurrently --names \"server,client\" \"npm run start --silent\" \"npm run client --silent\""
   },
